@@ -41,7 +41,7 @@ jobs:
 
 
       - run: ls && cd Backend/ && mvn dependency:go-offline
-      - run: cd ../KOSA/Frontend && npm ci
+      - run: ls ../KOSA/Frontend 
       
       - save_cache:
           name: Saved backend cache
