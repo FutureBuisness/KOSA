@@ -26,22 +26,22 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-{{ checksum "Backend/pom.xml" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: mvn dependency:go-offline
+      - run: cd Backend/ && mvn dependency:go-offline
 
       - save_cache:
           paths:
             - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
+          key: v1-dependencies-{{ checksum "Backend/pom.xml" }}
 
       # run tests!
       - run: 
           name: linter test
-          command: mvn checkstyle:check
+          command: cd Backend/ && mvn checkstyle:check
 
       - run: 
           name: unit tests
-          command: mvn test
+          command: cd Backend/ && mvn test
