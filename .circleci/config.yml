@@ -50,10 +50,10 @@ jobs:
           key: v1-dependencies-{{ checksum "Backend/pom.xml" }}
       
       - save_cache:
-        name: Saved frontend cache
-        paths:
-          - ~/Frontend/node_modules
-        key: v1-dependencies-{{ checksum "Frontend/package.json" }}
+          name: Saved frontend cache
+          paths:
+            - ~/Frontend/node_modules
+          key: v1-dependencies-{{ checksum "Frontend/package.json" }}
 
 
       # run tests!
