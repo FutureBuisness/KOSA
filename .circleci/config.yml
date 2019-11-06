@@ -47,7 +47,7 @@ jobs:
           name: unit tests
           command: cd Backend/ && mvn test
       
-      - run: cd ../Frontend/ && npm ci
+      - run: cd Frontend/ && npm ci
 
       - run:
           name: frontend linter
