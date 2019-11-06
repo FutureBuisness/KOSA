@@ -13,51 +13,51 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/postgres:9.4
 
-      working_directory: ~/Backend
+    working_directory: ~/Backend
 
-      environment:
-      # Customize the JVM maximum heap limit
-        MAVEN_OPTS: -Xmx3200m
+    environment:
+    # Customize the JVM maximum heap limit
+      MAVEN_OPTS: -Xmx3200m
 
-      steps:
-        - checkout
+    steps:
+      - checkout
 
-        # Download and cache dependencies
-        - restore_cache:
-            keys:
-              - v1-dependencies-{{ checksum "Backend/pom.xml" }}
-              # fallback to using the latest cache if no exact match is found
-              - v1-dependencies-
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Backend/pom.xml" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
-        - run: cd Backend/ && mvn dependency:go-offline
+      - run: cd Backend/ && mvn dependency:go-offline
 
-        - save_cache:
-            paths:
-              - ~/.m2
-            key: v1-dependencies-{{ checksum "Backend/pom.xml" }}
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "Backend/pom.xml" }}
 
-        # run tests!
-        - run: 
-            name: linter test
-            command: cd Backend/ && mvn checkstyle:check
+      # run tests!
+      - run: 
+          name: linter test
+          command: cd Backend/ && mvn checkstyle:check
 
-        - run: 
-            name: unit tests
-            command: cd Backend/ && mvn test
+      - run: 
+          name: unit tests
+          command: cd Backend/ && mvn test
     
   frontend:
       docker:
         - image: circleci/node:12.13-stretch
 
-        working_directory: ~/Frontend
-        steps:
-        - checkout
-        - run: cd Frontend/ && npm ci
+      working_directory: ~/Frontend
+      steps:
+      - checkout
+      - run: cd Frontend/ && npm ci
 
-        - run:
-            name: frontend linter
-            command: npm run eslint
-        
-        - run:
-            name: frontend tests
-            command: npm run test
+      - run:
+          name: frontend linter
+          command: npm run eslint
+      
+      - run:
+          name: frontend tests
+          command: npm run test
