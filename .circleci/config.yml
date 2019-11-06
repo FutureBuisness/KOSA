@@ -15,7 +15,7 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/postgres:9.4
 
-    working_directory: ~
+    working_directory: ~/KOSA
 
     environment:
     # Customize the JVM maximum heap limit
@@ -41,7 +41,7 @@ jobs:
 
 
       - run: ls && cd Backend/ && mvn dependency:go-offline
-      - run: cd ~/Frontend/ && npm ci
+      - run: cd ../Frontend/ && npm ci
       
       - save_cache:
           name: Saved backend cache
