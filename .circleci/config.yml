@@ -40,8 +40,8 @@ jobs:
             - v4-dependencies-
 
 
-      - run: cd Backend/ && mvn dependency:go-offline
-      - run: cd Frontend/ && npm ci
+      - run: cd Backend/ && mvn dependency:go-offline && pwd
+      - run: cd ~/Frontend/ && npm ci
       
       - save_cache:
           name: Saved backend cache
