@@ -39,9 +39,9 @@ jobs:
 
       # run tests!
       - run: 
-        name: linter test
-        command: mvn checkstyle:check
+          name: linter test
+          command: mvn checkstyle:check
 
       - run: 
-        name: unit tests
-        command: mvn test
+          name: unit tests
+          command: mvn test
